@@ -31,8 +31,9 @@ Choose from the Options Below:
                         if f"{cryptograph.Encrypt(passwd)}" in i:
                             f.close()
                             found = True
+                            cust_name = i.split()[0].replace("_"," ")
                             print("Login Successful!")
-                            print(f"Welcome {i.split()[0].replace("_"," ")}! Hope you are having a nice day!")
+                            print(f"Welcome {cust_name}! Hope you are having a nice day!")
                             print('''
 Choose an option from below:
     1) Check Balance
@@ -47,15 +48,28 @@ Choose an option from below:
                                 menu
                             
                             if nch == 1:
-                                with open('data/accounts','r') as file:
+                                with open('data/accounts.txt','r') as file:
                                     acc_data = file.readlines()
-                                    for i in acc_data:
-                                        
-                                        ...
+                                    for j in acc_data:
+                                        if f"{cust_id}" in j:
+                                            d = j.split()
+                                            print(f"Account balance for Account Number {d[0]} associated to {cust_name} is: Rs.{d[1]}")
+                                            print("")
+                                            print("Would you like to make a transaction(1) or exit(2): ")
+                                            cho = int(input("Enter your Choice: "))
+                                            if cho!=1 or cho!=2:
+                                                print("Invalid choice, try again!")
+                                            elif cho==1:
+                                                ...  #Add a transaction system.
+                                            else:
+                                                print("Thank you for using our Banking System! Visit Again.")
+                                                break
+                    
                             if nch == 2:
                                 ...
                             if nch == 3:
                                 f.close()
+                                print("Thank you for using our Banking System! Visit Again.")
                                 break
 
                 if not found:
