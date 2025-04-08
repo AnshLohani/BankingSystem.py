@@ -1,4 +1,3 @@
-from account import Account
 from customer import Customer
 from datetime import datetime
 
@@ -8,13 +7,12 @@ class Transaction:
         self.sender = senderAccountNumber
         self.receiver = receiverAccountNumber
         self.amount = amount
-        Account.withdraw(senderAccountNumber,amount)
-        Account.deposit(receiverAccountNumber,amount)
 
-        with open('data/transaction_logs.txt','a') as f:
-            f.write(f"{self.sender} {self.receiver} {self.amount} \n")
+        Transaction.updateBalance(self.sender,self.amount,"W")
+        Transaction.updateBalance(self.receiver,self.amount,"D")
+        Transaction.updateTransactionLog(self.sender,self.receiver,amount)
 
-        print(f"{self.sender} sent {self.amount} to {self.receiver}")
+        print("Transaction Successful")
 
 
     @classmethod
