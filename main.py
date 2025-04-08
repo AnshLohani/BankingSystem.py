@@ -79,12 +79,7 @@ Choose an option from below:
                                     print("Account Numbers Dont Match! Try Again")
                                 passwd = input("Enter you password: ")
                                 if Functions.VerifyPassword(passwd,"C") and Functions.verify_captcha():
-                                    Transaction.updateBalance(cust_id,amount,"W")
-                                    Transaction.updateBalance(acc,amount,"D")
-                                    print("Transaction Sucessful")
-                                    Transaction.updateTransactionLog(Functions.findAccNo(cust_id),acc,amount)
-                                    time.sleep(10)
-                                    print("Exiting Console")
+                                    Transaction(Functions.findAccNo(cust_id),acc,amount)
                                     break
                                 else:
                                     print("Wrong Password! Try Again.")
