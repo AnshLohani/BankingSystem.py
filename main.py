@@ -5,7 +5,7 @@ from account import Account
 from customer import Customer
 from transaction import Transaction
 import cryptograph
-
+import time
 
 def menu():
     while True:
@@ -57,16 +57,24 @@ Choose an option from below:
                                             print("")
                                             print("Would you like to make a transaction(1) or exit(2): ")
                                             cho = int(input("Enter your Choice: "))
-                                            if cho!=1 or cho!=2:
+                                            if cho not in [1,2]:
                                                 print("Invalid choice, try again!")
                                             elif cho==1:
-                                                ...  #Add a transaction system.
+                                                nch = 2
                                             else:
                                                 print("Thank you for using our Banking System! Visit Again.")
+                                                file.close()
                                                 break
                     
                             if nch == 2:
-                                ...
+                                print("Welcome to the Transaction Page!")
+                                acc = int("Enter the Beneficiary Account Number: ")
+                                racc = int("Re-Enter/Confirm the Beneficiary Account Number: ")
+                                if acc != racc:
+                                    print("Account Numbers Dont Match! Try Again")
+                                
+
+
                             if nch == 3:
                                 f.close()
                                 print("Thank you for using our Banking System! Visit Again.")
@@ -77,8 +85,11 @@ Choose an option from below:
                     print("Try Again!")
                     f.close()
                     menu()
-                
+
+
         elif ch == 2:
+            ...
+        elif ch == 3:
             ...
         else:
             print("Invalid Choice Start Again!")
