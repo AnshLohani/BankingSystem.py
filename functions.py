@@ -17,3 +17,11 @@ class Functions:
                     Verified = True
             return Verified
             
+    def findAccNo(cust_id):
+        with open('data/accounts.txt','r') as file:
+            data = file.readlines()
+            for i in data:
+                if cust_id in i:
+                    acc = i.split()[0]
+        file.close()
+        return acc
