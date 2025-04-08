@@ -1,11 +1,7 @@
-import account
-import customer
-import transaction
+
 from functions import Functions
-from account import Account
 from customer import Customer
 from transaction import Transaction
-import cryptograph
 import time
 
 def menu():
