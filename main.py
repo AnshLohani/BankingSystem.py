@@ -17,7 +17,7 @@ Choose from the Options Below:
     2) New Customer Registration
     3) Employee Login
         ''')
-        ch = int(input("Enter your Choice (1/2): "))
+        ch = int(input("Enter your Choice (1/2/3): "))
 
         if ch == 1:
             #Customer Login System Created
@@ -106,13 +106,17 @@ Choose an option from below:
             emp_id = input("Enter Employee ID: ")
             with open('data/employee.txt') as file:
                 emp_data = file.readlines()
-                emp_ids = [k[0] for k in emp_data]
-                emp_names = [k[1] for k in emp_data]
+                emp_ids = list()
+                for i in emp_data:
+                    emp_ids.append(i.split(" ")[0])
+                emp_names = list()
+                for j in emp_data:
+                    emp_names.append(i.split(" ")[1])
                 if emp_id in emp_ids:
                     password = input("Enter your password: ")
                     temp_captcha = Functions.verify_captcha()
                     if  temp_captcha and Functions.VerifyPassword(password,"E"):
-                        print(f"Welcome {emp_names[emp_ids.index(emp_id)]}! Great to have you.")
+                        print(f"Welcome {emp_names[emp_ids.index(emp_id)].replace('_'," ")}! Great to have you.")
                         print('''
 Choose from an option below:
     1) Make Transaction within Accounts
@@ -126,7 +130,7 @@ Choose from an option below:
                         if cho not in [1,2,3,4,5]:
                             print("Invalid Choice! Try Aagin...")
                             time.sleep(3)
-                        elif ch == 1:
+                        elif cho == 1:
                             #Transaction between Accounts within Bank.
                             sender_acc = int(input("Enter Senders Account Number: "))
                             reciever_acc = int(input("Enter recievers Account Number: "))
@@ -137,7 +141,7 @@ Choose from an option below:
                                 print("Thank you for using our Banking System!")
                             else:
                                 print("Something went Wrong! Try Again.")
-                        elif ch == 2:
+                        elif cho == 2:
                             #Deposit Money to Account
                             acc = int(input("Enter Account Number: "))
                             with open("data/accounts.txt",'r') as file:
@@ -151,7 +155,7 @@ Choose from an option below:
                                         print("Something went Wrong! Try Again Later...")
                                 else:
                                     print("Account Not Found! Try again Later...") 
-                        elif ch == 3:
+                        elif cho == 3:
                             #Withdraw Money from Account.
                             acc = int(input("Enter Account Number: "))
                             with open("data/accounts.txt",'r') as file:
@@ -166,11 +170,19 @@ Choose from an option below:
                                 else:
                                     print("Account Not Found! Try again Later...") 
                             ...
-                        elif ch == 4:
+                        elif cho == 4:
                             #Make new Customer and Account.
-                            
+                            name = input("Enter the Full Name of Customer: ").replace(" ","_").lstrip("_").rstrip("_")
+                            email = input("Enter User Email: ")
+                            type = input("Enter Type of Account (SA/CA): ")
+                            bal = float(input("Enter balance to add according to the Account type: "))
+                            pswd = input("Enter a temporary password for user: ")
+                            Customer(name,email,type.upper(),bal,pswd)
+                            print("Processing Request...")
+                            time.sleep(4)
+                            print("Customer Created Successfully!")
                             ...
-                        elif ch == 5:
+                        elif cho == 5:
                             acc = int(input("Enter Account Number: "))
                             logs = Transaction.getTransactionLog(account=acc)
                             print("Logs:")
