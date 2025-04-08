@@ -43,7 +43,7 @@ class Account:
                             raise Exception("Insufficient Funds! Balance too low.")
                         else:
                             newbal = float(bal) - amount
-                            updated.append(f"{acc} {bal} {ty} {cid}")
+                            updated.append(f"{acc} {newbal} {ty} {cid}")
                     else:
                         updated.append(i)
                 file.close()
