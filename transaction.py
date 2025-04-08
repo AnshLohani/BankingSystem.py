@@ -1,5 +1,6 @@
 from account import Account
 from customer import Customer
+from datetime import datetime
 
 class Transaction:
 
@@ -18,12 +19,15 @@ class Transaction:
 
     @classmethod
     def updateTransactionLog(self,senderAccNo,ReceiverAccNo,amount):
-        with open('data/transaction_logs.txt','rw') as f:
+        with open('data/transaction_logs.txt','r') as f:
             lines = f.readlines()
-            lines.append(f"{senderAccNo} {ReceiverAccNo} {amount} \n")
+            now = datetime.now()
+            date_time_str = now.strftime("%Y-%m-%d %H:%M:%S")
+            lines.append(f"{date_time_str} {senderAccNo} {ReceiverAccNo} {amount} \n")
+            f.close()
+        with open('data/transaction_logs.txt','w') as f:
             f.writelines(lines)
-        f.close()
-        ...
+        
 
     @classmethod
     def withdraw(SenderID,amount):
