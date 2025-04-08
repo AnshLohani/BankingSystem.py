@@ -29,7 +29,7 @@ Choose from the Options Below:
                 found = False
                 for i in data:
                     if f"{cust_id}" in i:
-                        if Functions.VerifyPassword(passwd,"C"):
+                        if Functions.VerifyPassword(passwd,"C") and Functions.verify_captcha():
                             f.close()
                             found = True
                             cust_name = i.split()[0].replace("_"," ")
@@ -77,7 +77,7 @@ Choose an option from below:
                                 if acc != racc:
                                     print("Account Numbers Dont Match! Try Again")
                                 passwd = input("Enter you password: ")
-                                if Functions.VerifyPassword(passwd,"C"):
+                                if Functions.VerifyPassword(passwd,"C") and Functions.verify_captcha():
                                     Account.updateBalance(cust_id,amount,"W")
                                     Account.updateBalance(acc,amount,"D")
                                     print("Transaction Sucessful")
