@@ -46,7 +46,7 @@ Choose an option from below:
                             nch = int(input("Enter a choice (1/2/3): "))
                             if nch not in [1,2,3]:
                                 print("Invalid Choice Login Again!")
-                                menu
+                                menu()
                             
                             if nch == 1:
                                 with open('data/accounts.txt','r') as file:
@@ -60,8 +60,10 @@ Choose an option from below:
                                             cho = int(input("Enter your Choice: "))
                                             if cho not in [1,2]:
                                                 print("Invalid choice, try again!")
+                                                file.close()
                                             elif cho==1:
                                                 nch = 2
+                                                file.close()
                                             else:
                                                 print("Thank you for using our Banking System! Visit Again.")
                                                 file.close()
@@ -69,13 +71,20 @@ Choose an option from below:
                     
                             if nch == 2:
                                 print("Welcome to the Transaction Page!")
-                                acc = int("Enter the Beneficiary Account Number: ")
-                                racc = int("Re-Enter/Confirm the Beneficiary Account Number: ")
+                                acc = int(input("Enter the Beneficiary Account Number: "))
+                                racc = int(input("Re-Enter/Confirm the Beneficiary Account Number: "))
+                                amount = int(input("Enter amount to Send: "))
                                 if acc != racc:
                                     print("Account Numbers Dont Match! Try Again")
                                 passwd = input("Enter you password: ")
                                 if Functions.VerifyPassword(passwd,"C"):
-                                    ...
+                                    Account.updateBalance(cust_id,amount,"W")
+                                    Account.updateBalance(acc,amount,"D")
+                                    print("Transaction Sucessful")
+                                    Transaction.updateTransactionLog(Functions.findAccNo(cust_id),acc,amount)
+                                    time.sleep(10)
+                                    print("Exiting Console")
+                                    break
                                 else:
                                     print("Wrong Password! Try Again.")
 

@@ -14,38 +14,43 @@ class Account:
             self.__balance -= value
 
     @classmethod
-    def updateBalance(self,CustomerID,amount : float ,type : str):
+    def updateBalance(self,CustomerID,amount,type : str):
         amount = float(amount)
         if type.upper() == "D":
-            with open("data/accounts.txt",'rw') as file:
+            with open("data/accounts.txt",'r') as file:
                 lines = file.readlines()
                 updated = list()
                 for i in lines:
                     if f"{CustomerID}" in i:
-                        acc, bal, ty, cid = i.split('')
-                        bal+= amount
-                        updated.append(f"{acc} {bal} {ty} {cid}")
+                        acc, bal, ty, cid = i.split(' ')
+                        newbal = float(bal) + amount
+                        updated.append(f"{acc} {newbal} {ty} {cid}")
                     else:
                         updated.append(i)
+                file.close()
+            with open("data/accounts.txt",'w') as file:
                 file.writelines(updated)
                 file.close()
-                return "Successful Deposit..."
-        elif type.upper() == "W":
-            with open("data/accounts.txt",'rw') as file:
-                lines = file.readlines
+            return "Successful Deposit..."
+        if type.upper() == "W":
+            with open("data/accounts.txt",'r') as file:
+                lines = file.readlines()
                 updated = list()
                 for i in lines:
                     if f"{CustomerID}" in i:
-                        acc, bal, ty, cid = i.split('')
-                        if bal<amount:
+                        acc, bal, ty, cid = i.split(' ')
+                        if float(bal)<amount:
                             raise Exception("Insufficient Funds! Balance too low.")
-                        bal -= amount
-                        updated.append(f"{acc} {bal} {ty} {cid}")
+                        else:
+                            newbal = float(bal) - amount
+                            updated.append(f"{acc} {bal} {ty} {cid}")
                     else:
                         updated.append(i)
+                file.close()
+            with open("data/accounts.txt",'w') as file:
                 file.writelines(updated)
                 file.close()
-                return "Successful Withdrawal..."
+            return "Successful Withdrawal..."
         else:
             raise Exception("Invalid Type of Transaction.")
                                                 
