@@ -73,6 +73,12 @@ Choose an option from below:
                                 racc = int("Re-Enter/Confirm the Beneficiary Account Number: ")
                                 if acc != racc:
                                     print("Account Numbers Dont Match! Try Again")
+                                passwd = input("Enter you password: ")
+                                if Functions.VerifyPassword(passwd,"C"):
+                                    ...
+                                else:
+                                    print("Wrong Password! Try Again.")
+
                                 
 
 
