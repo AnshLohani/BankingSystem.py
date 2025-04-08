@@ -14,7 +14,7 @@ class Account:
             self.__balance -= value
 
     @classmethod
-    def updateBalance(CustomerID,amount : float ,type : str):
+    def updateBalance(self,CustomerID,amount : float ,type : str):
         amount = float(amount)
         if type.upper() == "D":
             with open("data/accounts.txt",'rw') as file:
