@@ -23,9 +23,32 @@ class Account:
                 for i in lines:
                     if f"{CustomerID}" in i:
                         acc, bal, ty, cid = i.split('')
+                        bal+= amount
+                        updated.append(f"{acc} {bal} {ty} {cid}")
                     else:
                         updated.append(i)
-    
+                file.writelines(updated)
+                file.close()
+                return "Successful Deposit..."
+        elif type.upper() == "W":
+            with open("data/accounts.txt",'rw') as file:
+                lines = file.readlines
+                updated = list()
+                for i in lines:
+                    if f"{CustomerID}" in i:
+                        acc, bal, ty, cid = i.split('')
+                        if bal<amount:
+                            raise Exception("Insufficient Funds! Balance too low.")
+                        bal -= amount
+                        updated.append(f"{acc} {bal} {ty} {cid}")
+                    else:
+                        updated.append(i)
+                file.writelines(updated)
+                file.close()
+                return "Successful Withdrawal..."
+        else:
+            raise Exception("Invalid Type of Transaction.")
+                                                
 
 
 class SavingsAccount(Account):
