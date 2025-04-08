@@ -26,6 +26,18 @@ class Transaction:
         with open('data/transaction_logs.txt','w') as f:
             f.writelines(lines)
         
+    @classmethod
+    def getTransactionLog(self,account):
+        with open('data/transaction_logs.txt','r') as f:
+            lines = f.readlines()
+            logs = list()
+            for i in lines:
+                if f"{account}" in i:
+                    logs.append(i)
+                else:
+                    pass
+            return logs
+
 
     @classmethod
     def updateBalance(self,CustomerID,amount,type : str):
