@@ -167,7 +167,8 @@ Choose from an option below:
                                     print("Account Not Found! Try again Later...") 
                             ...
                         elif ch == 4:
-                            #Transaction between Accounts.
+                            #Make new Customer and Account.
+                            
                             ...
                         elif ch == 5:
                             acc = int(input("Enter Account Number: "))
