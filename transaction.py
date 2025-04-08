@@ -15,6 +15,16 @@ class Transaction:
 
         print(f"{self.sender} sent {self.amount} to {self.receiver}")
 
+
+    @classmethod
+    def updateTransactionLog(self,senderAccNo,ReceiverAccNo,amount):
+        with open('data/transaction_logs.txt','rw') as f:
+            lines = f.readlines()
+            lines.append(f"{senderAccNo} {ReceiverAccNo} {amount} \n")
+            f.writelines(lines)
+        f.close()
+        ...
+
     @classmethod
     def withdraw(SenderID,amount):
         with open('data/accounts.txt','r+w') as file:
