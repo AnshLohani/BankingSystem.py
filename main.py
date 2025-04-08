@@ -110,8 +110,8 @@ Choose an option from below:
                 emp_names = [k[1] for k in emp_data]
                 if emp_id in emp_ids:
                     password = input("Enter your password: ")
-                    tempcaptcha = Functions.verify_captcha()
-                    if  tempcaptcha and Functions.VerifyPassword(password,"E"):
+                    temp_captcha = Functions.verify_captcha()
+                    if  temp_captcha and Functions.VerifyPassword(password,"E"):
                         print(f"Welcome {emp_names[emp_ids.index(emp_id)]}! Great to have you.")
                         print('''
 Choose from an option below:
@@ -132,26 +132,56 @@ Choose from an option below:
                             reciever_acc = int(input("Enter recievers Account Number: "))
                             amount = float(input("Enter the amount to be transferred: "))
                             if Functions.VerifyPassword() and Functions.verify_captcha():
-                                
-                                ...
+                                Transaction(sender_acc,reciever_acc,amount)
+                                time.sleep(6)
+                                print("Thank you for using our Banking System!")
                             else:
                                 print("Something went Wrong! Try Again.")
                         elif ch == 2:
-                            #Transaction between Accounts.
-                            ...
+                            #Deposit Money to Account
+                            acc = int(input("Enter Account Number: "))
+                            with open("data/accounts.txt",'r') as file:
+                                data = file.read()
+                                if str(acc) in data:
+                                    bal = float(input("Enter amount to Deposit: "))
+                                    pswd = input("Enter your password: ")
+                                    if Functions.verify_captcha() and Functions.VerifyPassword(pswd,"E"):
+                                        Transaction.updateBalance(acc,bal,"D")
+                                    else:
+                                        print("Something went Wrong! Try Again Later...")
+                                else:
+                                    print("Account Not Found! Try again Later...") 
                         elif ch == 3:
-                            #Transaction between Accounts.
+                            #Withdraw Money from Account.
+                            acc = int(input("Enter Account Number: "))
+                            with open("data/accounts.txt",'r') as file:
+                                data = file.read()
+                                if str(acc) in data:
+                                    bal = float(input("Enter amount to Deposit: "))
+                                    pswd = input("Enter your password: ")
+                                    if Functions.verify_captcha() and Functions.VerifyPassword(pswd,"E"):
+                                        Transaction.updateBalance(acc,bal,"W")
+                                    else:
+                                        print("Something went Wrong! Try Again Later...")
+                                else:
+                                    print("Account Not Found! Try again Later...") 
                             ...
                         elif ch == 4:
                             #Transaction between Accounts.
                             ...
                         elif ch == 5:
-                            #Transaction between Accounts.
+                            acc = int(input("Enter Account Number: "))
+                            logs = Transaction.getTransactionLog(account=acc)
+                            print("Logs:")
+                            for i in logs:
+                                print(i)
+                            time.sleep(20)
+                            print("Exiting console.")
                             ...
                         else:
                             print("Exiting Console. Thank you for using our Banking System!")
                             time.sleep(6)
-                    elif tempcaptcha == True:
+                    elif temp_captcha == True:
                         print("Wrong Password Entered")
                     else:
                         print("Wrong Captcha Entered or Something went wrong....")
