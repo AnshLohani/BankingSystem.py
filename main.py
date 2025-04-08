@@ -1,6 +1,7 @@
 import account
 import customer
 import transaction
+from functions import Functions
 from account import Account
 from customer import Customer
 from transaction import Transaction
@@ -28,7 +29,7 @@ Choose from the Options Below:
                 found = False
                 for i in data:
                     if f"{cust_id}" in i:
-                        if f"{cryptograph.Encrypt(passwd)}" in i:
+                        if Functions.VerifyPassword(passwd,"C"):
                             f.close()
                             found = True
                             cust_name = i.split()[0].replace("_"," ")
