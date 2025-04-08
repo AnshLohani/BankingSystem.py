@@ -13,6 +13,19 @@ class Account:
         else:
             self.__balance -= value
 
+    @classmethod
+    def updateBalance(CustomerID,amount : float ,type : str):
+        amount = float(amount)
+        if type.upper() == "D":
+            with open("data/accounts.txt",'rw') as file:
+                lines = file.readlines()
+                updated = list()
+                for i in lines:
+                    if f"{CustomerID}" in i:
+                        acc, bal, ty, cid = i.split('')
+                    else:
+                        updated.append(i)
+    
 
 
 class SavingsAccount(Account):
