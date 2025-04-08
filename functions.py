@@ -1,4 +1,5 @@
 from cryptograph import Encrypt
+import random
 
 class Functions:
 
@@ -25,3 +26,12 @@ class Functions:
                     acc = i.split()[0]
         file.close()
         return acc
+    
+    def verify_captcha():
+        i = random.randrange(10000,99999)
+        print("Captcha: ",i)
+        x = int(input("Enter the given Captcha: "))
+        if x == i:
+            return True
+        else:
+            return False
