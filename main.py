@@ -62,7 +62,6 @@ Choose an option from below:
                                                 nch = 2
                                                 file.close()
                                             else:
-                                                print("Thank you for using our Banking System! Visit Again.")
                                                 file.close()
                                                 break
                     
@@ -85,7 +84,6 @@ Choose an option from below:
 
                             if nch == 3:
                                 f.close()
-                                print("Thank you for using our Banking System! Visit Again.")
                                 break
 
                 if not found:
@@ -95,7 +93,23 @@ Choose an option from below:
                     menu()
 
         elif ch == 2:
-            ...
+            # New Customer Registeration! 
+            name = input("Enter the Full Name of Customer: ").replace(" ","_").lstrip("_").rstrip("_")
+            email = input("Enter User Email: ")
+            type = input("Enter Type of Account (SA/CA): ")
+            bal = float(input("Enter balance to add according to the Account type: "))
+            pswd = input("Enter a temporary password for user: ")
+            if Functions.verify_captcha():
+                Customer(name,email,type.upper(),bal,pswd)
+                print("Processing Request...")
+                time.sleep(4)
+                print("Customer Created Successfully!")
+            else:
+                print("Wrong Captcha! Try Again...")
+                print("Exiting console...")
+                time.sleep(5)
+                break
+
         elif ch == 3:
             #Employee Login System
             print("Welcome Employee! Please Enter your details.")
@@ -134,7 +148,7 @@ Choose from an option below:
                             if Functions.VerifyPassword() and Functions.verify_captcha():
                                 Transaction(sender_acc,reciever_acc,amount)
                                 time.sleep(6)
-                                print("Thank you for using our Banking System!")
+                                break
                             else:
                                 print("Something went Wrong! Try Again.")
                         elif cho == 2:
@@ -177,7 +191,7 @@ Choose from an option below:
                             print("Processing Request...")
                             time.sleep(4)
                             print("Customer Created Successfully!")
-                            ...
+                            break
                         elif cho == 5:
                             acc = int(input("Enter Account Number: "))
                             logs = Transaction.getTransactionLog(account=acc)
@@ -188,16 +202,20 @@ Choose from an option below:
                             print("Exiting console.")
                             ...
                         else:
-                            print("Exiting Console. Thank you for using our Banking System!")
+                            print("Exiting Console.")
                             time.sleep(6)
+                            break
                     elif temp_captcha == True:
                         print("Wrong Password Entered")
                     else:
                         print("Wrong Captcha Entered or Something went wrong....")
+                        break
                 elif emp_id not in emp_ids:
                     print("Employee not Found. Try Again...")
         else:
             print("Invalid Choice Start Again!")
             pass
+
+    print("Thanks for using our Banking System!")
 
 menu()
