@@ -36,7 +36,10 @@ class Transaction:
                     logs.append(i)
                 else:
                     pass
-            return logs
+            if logs == []:
+                print("Logs Not Found: Incorrect Account Number!")
+            else:
+                return logs
 
 
     @classmethod
