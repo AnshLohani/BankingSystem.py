@@ -4,15 +4,6 @@ class Account:
         self.account_no = account_no
         self.__balance = balance   #Encapsulated Balance - Cannot be accessed outside class.
 
-    def deposit(self,custID,value):
-        self.__balance += value
-
-    def withdraw(self,custID,value):
-        if value > self.__balance:
-            print("Insufficient Funds!")
-        else:
-            self.__balance -= value
-
     @classmethod
     def updateBalance(self,CustomerID,amount,type : str):
         amount = float(amount)

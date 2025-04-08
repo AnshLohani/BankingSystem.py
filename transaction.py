@@ -4,11 +4,11 @@ from datetime import datetime
 
 class Transaction:
 
-    def __init__(self,senderID,receiverAccountNumber,amount):
-        self.sender = senderID
+    def __init__(self,senderAccountNumber,receiverAccountNumber,amount):
+        self.sender = senderAccountNumber
         self.receiver = receiverAccountNumber
         self.amount = amount
-        Account.withdraw(senderID,amount)
+        Account.withdraw(senderAccountNumber,amount)
         Account.deposit(receiverAccountNumber,amount)
 
         with open('data/transaction_logs.txt','a') as f:
