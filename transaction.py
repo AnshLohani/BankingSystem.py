@@ -30,16 +30,43 @@ class Transaction:
         
 
     @classmethod
-    def withdraw(SenderID,amount):
-        with open('data/accounts.txt','r+w') as file:
-            x = file.readlines()
-            for i in x:
-                if f"{SenderID}" in i:
-                    ...
-                else:
-                    ...
-
-    @classmethod 
-    def deposit(receiverAccNo,amount):
-        ...
+    def updateBalance(self,CustomerID,amount,type : str):
+        amount = float(amount)
+        if type.upper() == "D":
+            with open("data/accounts.txt",'r') as file:
+                lines = file.readlines()
+                updated = list()
+                for i in lines:
+                    if f"{CustomerID}" in i:
+                        acc, bal, ty, cid = i.split(' ')
+                        newbal = float(bal) + amount
+                        updated.append(f"{acc} {newbal} {ty} {cid}")
+                    else:
+                        updated.append(i)
+                file.close()
+            with open("data/accounts.txt",'w') as file:
+                file.writelines(updated)
+                file.close()
+            return "Successful Deposit..."
+        if type.upper() == "W":
+            with open("data/accounts.txt",'r') as file:
+                lines = file.readlines()
+                updated = list()
+                for i in lines:
+                    if f"{CustomerID}" in i:
+                        acc, bal, ty, cid = i.split(' ')
+                        if float(bal)<amount:
+                            raise Exception("Insufficient Funds! Balance too low.")
+                        else:
+                            newbal = float(bal) - amount
+                            updated.append(f"{acc} {newbal} {ty} {cid}")
+                    else:
+                        updated.append(i)
+                file.close()
+            with open("data/accounts.txt",'w') as file:
+                file.writelines(updated)
+                file.close()
+            return "Successful Withdrawal..."
+        else:
+            raise Exception("Invalid Type of Transaction.")
 
