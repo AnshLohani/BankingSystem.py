@@ -33,6 +33,7 @@ Choose from the Options Below:
                             print("Login Successful!")
                             print(f"Welcome {cust_name}! Hope you are having a nice day!")
                             print('''
+                                  
 Choose an option from below:
     1) Check Balance
     2) Make Transaction
@@ -128,6 +129,8 @@ Choose an option from below:
                     if  temp_captcha and Functions.VerifyPassword(password,"E"):
                         print(f"Welcome {emp_names[emp_ids.index(emp_id)].replace('_'," ")}! Great to have you.")
                         print('''
+                              
+                              
 Choose from an option below:
     1) Make Transaction within Accounts
     2) Deposit Money to Account (cheque or cash via/to customer)
