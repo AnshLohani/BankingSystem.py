@@ -1,3 +1,6 @@
 __pycache__/
 .idea/
 data/
+sendgrid.env
+test.py
+keys.py
